@@ -17,9 +17,9 @@ const ProductList = () => {
     if (isError)
       return (
         <div>
-          {error.status}
+          {"status" in error ? error.status : ""}
           <br />
-          {error.data}
+          {"data" in error ? "dart error" : ""}
         </div>
       );
     if (isLoading) return <div>loading...</div>;
