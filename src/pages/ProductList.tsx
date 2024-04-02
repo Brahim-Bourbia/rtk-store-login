@@ -1,41 +1,45 @@
 import { useEffect } from "react";
 import { useLazyGetListProductQuery } from "../store/portal-store";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
-  const [trigger, result, lastPromiseInfo] = useLazyGetListProductQuery();
+  const [trigger, result] = useLazyGetListProductQuery();
+
+  const { data, error, isError, isLoading, isFetching } = result;
 
   useEffect(() => {
-    trigger(5);
+    trigger({ limit: 14 }, true);
   }, []);
 
-  console.log(result, lastPromiseInfo);
-  if (result.status === "uninitialized") {
-    return <button onClick={() => trigger(5)}>Fetch Post</button>;
-  } else {
-    const { data, error, isError, isLoading, isFetching } = result;
-
-    if (isError)
-      return (
-        <div>
-          {"status" in error ? error.status : ""}
-          <br />
-          {"data" in error ? "dart error" : ""}
-        </div>
-      );
-    if (isLoading) return <div>loading...</div>;
-
+  if (isError)
     return (
       <div>
-        {isFetching ? (
-          <h3>Loading</h3>
-        ) : (
-          data.map((element: any) => {
-            return <p>{element.title}</p>;
-          })
-        )}
+        {"status" in error ? error.status : ""}
+        <br />
+        {"data" in error ? "dart error" : ""}
       </div>
     );
-  }
+  if (isLoading) return <div>loading...</div>;
+
+  return (
+    <div>
+      {isFetching ? (
+        <h3>Loading</h3>
+      ) : data ? (
+        data.map((element: any, index: number) => {
+          return (
+            <p>
+              <Link to={`/product/${element.id}`} key={index}>
+                Product {element.id}
+              </Link>
+            </p>
+          );
+        })
+      ) : (
+        ""
+      )}
+    </div>
+  );
 };
 
 export default ProductList;

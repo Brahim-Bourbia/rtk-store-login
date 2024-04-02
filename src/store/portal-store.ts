@@ -7,10 +7,10 @@ export const portalApi = createApi({
   }),
   endpoints: (builder) => ({
     getListProduct: builder.query({
-      query: (limit) => `posts/?_limit=${limit}`, // expects a JSON response
+      query: ({ limit }) => `posts/?_limit=${limit}`, // expects a JSON response
     }),
     getProduct: builder.query({
-      query: (id) => `posts/${id}`, // expects a JSON response
+      query: ({ postId: id }) => `posts/${id}`, // expects a JSON response
     }),
   }),
 });

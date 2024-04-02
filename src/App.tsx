@@ -15,15 +15,15 @@ function App() {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <Link to={"/product-list"}>ProductList</Link>
+            <Link to={"/products"}>ProductList</Link>
           </li>
         </ul>
       </div>
       <main className="container content">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/product-list" element={<ProductList />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/products" element={<ProductList />} />
         </Routes>
       </main>
     </Router>
