@@ -28,11 +28,9 @@ const ProductList = () => {
       ) : data ? (
         data.map((element: any, index: number) => {
           return (
-            <p>
-              <Link to={`/product/${element.id}`} key={index}>
-                Product {element.id}
-              </Link>
-            </p>
+            <Link to={`/product/${element.id}`} key={index}>
+              <p>Product {element.id}</p>
+            </Link>
           );
         })
       ) : (

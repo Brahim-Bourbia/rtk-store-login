@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLazyGetProductQuery } from "../store/portal-store";
 import { useEffect } from "react";
 
@@ -31,6 +31,10 @@ const Product = ({}) => {
         "no infor about this product !!!"
       ) : (
         <>
+          <Link style={{ textDecoration: "none" }} to="/products">
+            {" "}
+            {"<<"} Back to product List
+          </Link>
           <h1>Product {id} Infos</h1>
           <p>
             <label>Title :</label>
